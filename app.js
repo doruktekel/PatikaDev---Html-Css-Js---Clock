@@ -5,31 +5,26 @@ document.getElementById("ad").innerHTML =
 
 let saat = document.getElementById("saat");
 
-function showTime() {
-  let dates = new Date();
-  let h = dates.getHours();
-  let m = dates.getMinutes();
-  let s = dates.getSeconds();
-  let d = dates.getUTCDay();
+function zaman() {
+  const tarih = new Date();
 
-  if (d == 1) d = "Pazartesi";
-  if (d == 2) d = "Sali";
-  if (d == 3) d = "Carsamba";
-  if (d == 4) d = "Persembe";
-  if (d == 5) d = "Cuma";
-  if (d == 6) d = "Cumartesi";
-  if (d == 7) d = "Pazar";
+  let saat = tarih.getHours();
+  let dakika = tarih.getMinutes();
+  let saniye = tarih.getSeconds();
 
-  h = checkTime(h);
-  m = checkTime(m);
-  s = checkTime(s);
-  document.querySelector("#saat").innerHTML = `${h}:${m}:${s} ${d}`;
-  t = setTimeout("showTime()", 1000);
+  let gun = [
+    "Pazartesi",
+    "Salı",
+    "Çarşamba",
+    "Perşembe",
+    "Cuma",
+    "Cumartesi",
+    "Pazar",
+  ];
+  let gunName = gun[tarih.getDay()];
+
+  let clock = document.querySelector("#saat");
+  clock.innerHTML = `${saat}:${dakika}:${saniye} ${gunName}`;
 }
 
-function checkTime(i) {
-  if (i < 10) {
-    i = "0" + i;
-  }
-  return i;
-}
+setInterval(zaman, 1000);
